@@ -1,6 +1,6 @@
 import { Router } from 'express';
 const router = Router();
-import { getUsers, getEmployees, getUser, updateUser, deleteUser } from '../controllers/userController';
+import { getUsers, getEmployees, getUser, updateUser, deleteUser } from '../controllers/userController.js';
 import { protect, authorize } from '../middleware/auth';
 
 router.get('/', protect, authorize('admin'), getUsers);

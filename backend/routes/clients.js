@@ -1,7 +1,15 @@
 import { Router } from 'express';
 const router = Router();
-import { getClients, getClient, createClient, updateClient, deleteClient } from '../controllers/clientController';
-import { protect, authorize } from '../middleware/auth';
+
+import {
+    getClients,
+    getClient,
+    createClient,
+    updateClient,
+    deleteClient
+} from '../controllers/clientController.js';
+
+import { protect, authorize } from '../middleware/auth.js';
 
 router.route('/')
     .get(protect, authorize('admin'), getClients)
