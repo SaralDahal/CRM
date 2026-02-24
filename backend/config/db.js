@@ -1,0 +1,17 @@
+import { connect } from 'mongoose';
+
+const connectDB = async () => {
+    // MONGO_URI = 'mongodb://localhost:27017/Vault';
+    try {
+        const conn = await connect('mongodb://localhost:27017/CRM', {
+            useNewUrlParser: true,
+            useUnifiedTopology: true,
+        });
+        console.log(`MongoDB Connected: ${conn.connection.host}`);
+    } catch (error) {
+        console.error(`Error: ${error.message}`);
+        process.exit(1);
+    }
+};
+
+export default connectDB;
