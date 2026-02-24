@@ -1,7 +1,7 @@
 import Client from '../models/Client.js';
 import Project from '../models/project.js';
 import Task from '../models/Task.js';
-import User from '../models/User.js';
+import User from '../models/user.js';
 
 // @desc    Get dashboard statistics
 // @route   GET /api/dashboard/stats

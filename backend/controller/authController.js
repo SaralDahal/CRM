@@ -1,5 +1,5 @@
 import { sign } from 'jsonwebtoken';
-import User from '../models/User.js';
+import User from '../models/user.js';
 
 // Generate JWT Token
 const generateToken = (id) => {

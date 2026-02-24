@@ -1,11 +1,11 @@
-import { find, findById, findByIdAndUpdate } from '../models/User';
+import User from '../models/user.js';
 
-// @desc    Get all users (employees)
-// @route   GET /api/users
-// @access  Private (Admin)
+// Get all users
 export async function getUsers(req, res) {
     try {
-        const users = await find().select('-password').sort('-createdAt');
+        const users = await User.find()
+            .select('-password')
+            .sort('-createdAt');
 
         res.status(200).json({
             success: true,
@@ -13,19 +13,16 @@ export async function getUsers(req, res) {
             data: users
         });
     } catch (error) {
-        res.status(500).json({
-            success: false,
-            message: error.message
-        });
+        res.status(500).json({ success: false, message: error.message });
     }
 }
 
-// @desc    Get employees only
-// @route   GET /api/users/employees
-// @access  Private (Admin)
+// Get employees only
 export async function getEmployees(req, res) {
     try {
-        const employees = await find({ role: 'employee' }).select('-password').sort('-createdAt');
+        const employees = await User.find({ role: 'employee' })
+            .select('-password')
+            .sort('-createdAt');
 
         res.status(200).json({
             success: true,
@@ -33,19 +30,15 @@ export async function getEmployees(req, res) {
             data: employees
         });
     } catch (error) {
-        res.status(500).json({
-            success: false,
-            message: error.message
-        });
+        res.status(500).json({ success: false, message: error.message });
     }
 }
 
-// @desc    Get single user
-// @route   GET /api/users/:id
-// @access  Private (Admin)
+// Get single user
 export async function getUser(req, res) {
     try {
-        const user = await findById(req.params.id).select('-password');
+        const user = await User.findById(req.params.id)
+            .select('-password');
 
         if (!user) {
             return res.status(404).json({
@@ -54,27 +47,18 @@ export async function getUser(req, res) {
             });
         }
 
-        res.status(200).json({
-            success: true,
-            data: user
-        });
+        res.status(200).json({ success: true, data: user });
     } catch (error) {
-        res.status(500).json({
-            success: false,
-            message: error.message
-        });
+        res.status(500).json({ success: false, message: error.message });
     }
 }
 
-// @desc    Update user
-// @route   PUT /api/users/:id
-// @access  Private (Admin)
+// Update user
 export async function updateUser(req, res) {
     try {
-        // Don't allow password update through this route
-        delete req.body.password;
+        delete req.body.password; // prevent password update
 
-        let user = await findById(req.params.id);
+        let user = await User.findById(req.params.id);
 
         if (!user) {
             return res.status(404).json({
@@ -83,29 +67,22 @@ export async function updateUser(req, res) {
             });
         }
 
-        user = await findByIdAndUpdate(req.params.id, req.body, {
-            new: true,
-            runValidators: true
-        }).select('-password');
+        user = await User.findByIdAndUpdate(
+            req.params.id,
+            req.body,
+            { new: true, runValidators: true }
+        ).select('-password');
 
-        res.status(200).json({
-            success: true,
-            data: user
-        });
+        res.status(200).json({ success: true, data: user });
     } catch (error) {
-        res.status(500).json({
-            success: false,
-            message: error.message
-        });
+        res.status(500).json({ success: false, message: error.message });
     }
 }
 
-// @desc    Delete user
-// @route   DELETE /api/users/:id
-// @access  Private (Admin)
+// Delete user
 export async function deleteUser(req, res) {
     try {
-        const user = await findById(req.params.id);
+        const user = await User.findById(req.params.id);
 
         if (!user) {
             return res.status(404).json({
@@ -116,14 +93,8 @@ export async function deleteUser(req, res) {
 
         await user.deleteOne();
 
-        res.status(200).json({
-            success: true,
-            data: {}
-        });
+        res.status(200).json({ success: true, data: {} });
     } catch (error) {
-        res.status(500).json({
-            success: false,
-            message: error.message
-        });
+        res.status(500).json({ success: false, message: error.message });
     }
 }
