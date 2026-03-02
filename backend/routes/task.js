@@ -1,13 +1,13 @@
 import { Router } from 'express';
 const router = Router();
-import { getTasks, getTask, getTasksByProject, createTask, updateTask, deleteTask } from '../controllers/taskController.js';
-import { protect, authorize } from '../middleware/auth';
+import { getTasks, getTask, createTask, updateTask, deleteTask } from '../controller/taskController.js';
+import { protect, authorize } from '../middleware/auth.js';
 
 router.route('/')
     .get(protect, getTasks)
     .post(protect, authorize('admin'), createTask);
 
-router.get('/project/:projectId', protect, getTasksByProject);
+router.get('/project/:projectId', protect, getTasks);
 
 router.route('/:id')
     .get(protect, getTask)

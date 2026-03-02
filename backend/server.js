@@ -3,6 +3,14 @@ import { config } from 'dotenv';
 import cors from 'cors';
 import connectDB from './config/db.js';
 
+// Import routes
+import authRoutes from './routes/auth.js';
+import clientRoutes from './routes/clients.js';
+import projectRoutes from './routes/projects.js';
+import taskRoutes from './routes/task.js';
+import userRoutes from './routes/user.js';
+// import dashboardRoutes from './routes/dashboard.js';
+
 // Load env vars
 config();
 
@@ -21,7 +29,7 @@ app.use('/api/clients', clientRoutes);
 app.use('/api/projects', projectRoutes);
 app.use('/api/tasks', taskRoutes);
 app.use('/api/users', userRoutes);
-app.use('/api/dashboard', dashboardRoutes);
+// app.use('/api/dashboard', dashboardRoutes);
 
 // Health check route
 app.get('/api/health', (req, res) => {
@@ -30,6 +38,7 @@ app.get('/api/health', (req, res) => {
         message: 'Server is running'
     });
 });
+
 // Error handler
 app.use((err, req, res, next) => {
     console.error(err.stack);

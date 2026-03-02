@@ -1,7 +1,7 @@
 import { Router } from 'express';
 const router = Router();
-import { getProjects, getProject, createProject, updateProject, deleteProject } from '../controllers/projectController.js';
-import { protect, authorize } from '../middleware/auth';
+import { getProjects, getProject, createProject, updateProject, deleteProject } from '../controller/projectController.js';
+import { protect, authorize } from '../middleware/auth.js';
 
 router.route('/')
     .get(protect, getProjects)

@@ -7,7 +7,7 @@ import {
     createClient,
     updateClient,
     deleteClient
-} from '../controllers/clientController.js';
+} from '../controller/clientController.js';
 
 import { protect, authorize } from '../middleware/auth.js';
 

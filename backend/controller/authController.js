@@ -1,12 +1,12 @@
-import { sign } from 'jsonwebtoken';
+// import { sign } from 'jsonwebtoken';
 import User from '../models/user.js';
 
-// Generate JWT Token
-const generateToken = (id) => {
-    return sign({ id }, process.env.JWT_SECRET, {
-        expiresIn: '30d'
-    });
-};
+// // Generate JWT Token
+// const generateToken = (id) => {
+//     return sign({ id }, process.env.JWT_SECRET, {
+//         expiresIn: '30d'
+//     });
+// };
 
 // @desc    Register user
 // @route   POST /api/auth/register
